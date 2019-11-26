@@ -1,4 +1,6 @@
-﻿namespace ArchitectureParser.Architecture.Connections
+﻿using System;
+
+namespace ArchitectureParser.Architecture.Connections
 {
     public class Connection
     {
@@ -19,6 +21,9 @@
         // The constructor creates a Connection from the source to the destination
         public Connection(IConnectable source = null, IConnectable destination = null)
         {
+            if (source is null)      throw new ArgumentNullException("Cannot connect to null source");
+            if (destination is null) throw new ArgumentNullException("Cannot connect to null destination");
+
             Source      = source;
             Destination = destination;
         }

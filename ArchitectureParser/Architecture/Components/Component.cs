@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using ArchitectureParser.Architecture.Connections;
 
@@ -32,6 +33,8 @@ namespace ArchitectureParser.Architecture.Components
         // and the provided IConnectable as the destination
         public Connection Connect(IConnectable destination)
         {
+            if (destination is null) throw new ArgumentNullException("Cannot connect to null destination");
+
             var connection = new Connection(this, destination);
 
             Connections.Add(connection);
