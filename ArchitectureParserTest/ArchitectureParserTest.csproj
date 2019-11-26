@@ -51,6 +51,7 @@
     <Compile Include="ComponentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConnectionTest.cs" />
+    <Compile Include="ReusableComponentTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
