@@ -20,6 +20,54 @@ more easily allows new programmers to understand the flow of data through your c
 
 ---
 
+## The Strategy Behind The Diagram Approach
+
+### Background
+
+Students participating in *FIRST* programs are gaining skills they can use to kick start their careers and their lives. One of the biggest
+challenges they face, however, is learning these skills in an effective way. For robot programming, I felt that the provided templates are a
+great starting point, but they aren't without flaws that can make getting into programming more difficult. 
+
+The CommandBase template provides
+a wonderful framework that makes programming sequences of actions much easier, and the TimedRobot template is a great introduction to the
+linear structure most code takes (execute this step, then this step, then this step, etc.). However, the CommandBase template's event-based
+structure can make it difficult for new programmers to understand when their code is being called, and the TimedRobot template alone doesn't
+do much to prevent developers from writing tightly coupled code or features ("spaghetti code", if you will).
+
+The architecture diagram approach was created with three goals in mind:
+1. Keep the code easy to understand
+2. Keep the code clean
+3. Make it easy for new programmers to succeed and learn
+
+### The Approach
+
+Each robot needs to perform a series of tasks, and each task can be broken down into logical components. For example, a simple robot with just
+a drivebase can have the following logical components: gather driver station input, use the driver station input to calculate the speeds the
+motors need to spin at, and command the motors to spin at the desired speeds. These logical components will pass data around, meaning a 
+component ultimately accepts some input, performs some calculation/operation, then provides some output. The inputs a component accepts will
+come from other components, and the outputs it provides will be consumed by other components as well.
+
+This approach offers several benefits:
+* A component has a well-defined set of inputs
+* A component has a well-defined set of outputs
+* A component has a well-defined task it must accomplish
+* A component doesn't know or even care what other components are doing
+
+An architecture diagram can be developed by the programming team as a whole, then individual students can tackle implementing their own 
+components as defined by the architecture. This approach also provides a graphical representation of how data flows through the code, allowing
+more visual learners to better understand the architecture, why each part of the code is important, and ultimately how the robot does what it
+does. Another benefit is the prevention of scope/feature creep: if you want to add a new feature, make more components rather than forcing
+changes to existing components that maybe shouldn't be there.
+
+The diagram approach will let you go from a simple drawing like this:
+
+![example architecture](Documentation/exampleArchitecture.png)
+
+to a fully functioning robot code project that's clean, easy to understand, and has been written by inexperienced and experienced programmers
+alike.
+
+---
+
 ## Software Architecture Elements
 
 Architecture Parser consumes XML files that are exported from draw.io. This website is a wonderful online tool for
