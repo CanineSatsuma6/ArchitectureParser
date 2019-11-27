@@ -14,10 +14,12 @@ namespace ArchitectureParserTest
         {
             var source      = new Component("Source");
             var destination = new Component("Destination");
-            var connection  = new Connection(source, destination);
+            var connection  = new Connection(source, "Output", destination, "Input");
 
             Assert.AreEqual(source, connection.Source);
+            Assert.AreEqual("Output", connection.SourceOutput);
             Assert.AreEqual(destination, connection.Destination);
+            Assert.AreEqual("Input", connection.DestinationInput);
         }
 
         [TestMethod]
@@ -25,7 +27,7 @@ namespace ArchitectureParserTest
         public void ConnectionNullSource()
         {
             var destination = new Component("Destination");
-            var connection = new Connection(null, destination);
+            var connection = new Connection(null, null, destination, "Input");
         }
 
         [TestMethod]
@@ -33,14 +35,14 @@ namespace ArchitectureParserTest
         public void ConnectionNullDestination()
         {
             var source = new Component("Source");
-            var connection = new Connection(source, null);
+            var connection = new Connection(source, "Output", null, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConnectionNullSourceAndDestination()
         {
-            var connection = new Connection(null, null);
+            var connection = new Connection(null, null, null, null);
         }
     }
 }

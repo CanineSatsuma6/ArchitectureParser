@@ -26,12 +26,12 @@ namespace ArchitectureParserTest
         {
             var reusableComponent = new ReusableComponent("Instance", "Base");
             var component         = new Component("Component");
-            var connection        = reusableComponent.Connect(component);
+            var connection        = reusableComponent.Connect(component, "Output", "Input");
 
             Assert.AreEqual(reusableComponent, connection.Source);
-            Assert.AreEqual(component,         connection.Destination);
-            Assert.AreEqual(1,                 reusableComponent.Connections.Count);
-            Assert.AreEqual(1,                 component.Connections.Count);
+            Assert.AreEqual(component, connection.Destination);
+            Assert.AreEqual(1, reusableComponent.Connections.Count);
+            Assert.AreEqual(1, component.Connections.Count);
             Assert.IsTrue(reusableComponent.Connections.Contains(connection));
             Assert.IsTrue(component.Connections.Contains(connection));
         }
@@ -41,7 +41,7 @@ namespace ArchitectureParserTest
         public void ReusableComponentConnectToNullDestination()
         {
             var reusableComponent = new ReusableComponent("Instance", "Base");
-            var connection = reusableComponent.Connect(null);
+            var connection = reusableComponent.Connect(null, "Output", null);
         }
     }
 }
