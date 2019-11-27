@@ -30,9 +30,9 @@ namespace ArchitectureParser.Architecture.Components
 
         // Creates and returns a connection with this component as the source
         // and the provided IConnectable as the destination
-        public Connection Connect(IConnectable destination)
+        public Connection Connect(IConnectable destination, string outputName, string inputName)
         {
-            var connection = new Connection(this, destination);
+            var connection = new Connection(this, outputName, destination, inputName);
 
             Connections.Add(connection);
             destination.Connections.Add(connection);

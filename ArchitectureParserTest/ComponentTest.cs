@@ -23,7 +23,7 @@ namespace ArchitectureParserTest
             var component = new Component("Test");
             var destination = new Component("Destination");
 
-            var connection = component.Connect(destination);
+            var connection = component.Connect(destination, "Output", "Input");
 
             Assert.AreEqual(component, connection.Source);
             Assert.AreEqual(destination, connection.Destination);
@@ -38,7 +38,7 @@ namespace ArchitectureParserTest
         public void ComponentConnectToNullDestination()
         {
             var component = new Component("Test");
-            var connection = component.Connect(null);
+            var connection = component.Connect(null, null, null);
         }
     }
 }

@@ -9,6 +9,6 @@ namespace ArchitectureParser.Architecture.Connections
         ISet<Connection> Connections { get; }
 
         // Methods
-        Connection Connect(IConnectable destination);
+        Connection Connect(IConnectable destination, string outputName, string inputName);
     }
 }
