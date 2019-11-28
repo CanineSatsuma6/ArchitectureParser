@@ -13,5 +13,10 @@ namespace ArchitectureParser.Architecture.Components
         {
             InstanceName = instanceName;
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0} ({1})", InstanceName, Name);
+        }
     }
 }

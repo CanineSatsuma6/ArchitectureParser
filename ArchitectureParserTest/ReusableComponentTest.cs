@@ -2,7 +2,6 @@
 using System;
 
 using ArchitectureParser.Architecture.Components;
-using ArchitectureParser.Architecture.Connections;
 
 namespace ArchitectureParserTest
 {
