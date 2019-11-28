@@ -6,41 +6,18 @@ using ArchitectureParser.Architecture.Connections;
 
 namespace ArchitectureParser.Architecture.Components
 {
-    public class Composition : IConnectable
+    public class Composition : Connectable
     {
-        private HashSet<Connection>   m_connections;
-        private HashSet<IConnectable> m_contents;
+        private HashSet<Connectable> m_contents;
 
-        public string Name
-        {
-            get;
-        }
-
-        public ISet<Connection> Connections
-        {
-            get { return m_connections; }
-        }
-
-        public ISet<IConnectable> Contents
+        public ISet<Connectable> Contents
         {
             get { return m_contents; }
         }
 
-        public Composition(string name)
+        public Composition(string name) : base(name)
         {
-            Name          = name;
-            m_connections = new HashSet<Connection>();
-            m_contents    = new HashSet<IConnectable>();
-        }
-
-        public Connection Connect(IConnectable destination, string output, string input)
-        {
-            var connection = new Connection(this, output, destination, input);
-
-            Connections.Add(connection);
-            destination.Connections.Add(connection);
-
-            return connection;
+            m_contents    = new HashSet<Connectable>();
         }
 
         // This method effectively removes the composition from the component tree.
@@ -119,11 +96,6 @@ namespace ArchitectureParser.Architecture.Components
             // Remove all connections and content from the composition
             Connections.Clear();
             Contents.Clear();
-        }
-
-        public override string ToString()
-        {
-            return Name;
         }
     }
 }
