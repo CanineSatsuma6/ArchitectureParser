@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Architecture\Components\Component.cs" />
+    <Compile Include="Architecture\Components\Composition.cs" />
     <Compile Include="Architecture\Components\IReusable.cs" />
     <Compile Include="Architecture\Components\ReusableComponent.cs" />
     <Compile Include="Architecture\Connections\Connection.cs" />
