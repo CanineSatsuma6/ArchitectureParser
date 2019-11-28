@@ -31,5 +31,10 @@ namespace ArchitectureParser.Architecture.Connections
 
             return connection;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

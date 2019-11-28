@@ -45,5 +45,10 @@ namespace ArchitectureParser.Architecture.Connections
             Destination      = destination;
             DestinationInput = destinationInput;
         }
+
+        public override string ToString()
+        {
+            return string.Format("{{{0}.{1}, {2}.{3}}}", Source.Name, SourceOutput, Destination.Name, DestinationInput);
+        }
     }
 }
