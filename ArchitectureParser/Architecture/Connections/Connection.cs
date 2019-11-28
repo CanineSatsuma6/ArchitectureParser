@@ -5,14 +5,14 @@ namespace ArchitectureParser.Architecture.Connections
     public class Connection
     {
         // The source of the connection
-        public IConnectable Source
+        public Connectable Source
         {
             get;
             set;
         }
 
         // The destination of the connection
-        public IConnectable Destination
+        public Connectable Destination
         {
             get;
             set;
@@ -33,7 +33,7 @@ namespace ArchitectureParser.Architecture.Connections
         }
 
         // The constructor creates a Connection from the source to the destination
-        public Connection(IConnectable source = null, string sourceOutput = null, IConnectable destination = null, string destinationInput = null)
+        public Connection(Connectable source = null, string sourceOutput = null, Connectable destination = null, string destinationInput = null)
         {
             if (source is null)           throw new ArgumentNullException("Cannot connect to null source");
             if (sourceOutput is null)     throw new ArgumentNullException("Source output must have a name");

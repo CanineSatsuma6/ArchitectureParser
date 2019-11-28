@@ -14,10 +14,8 @@ namespace ArchitectureParserTest
         {
             var reusableComponent = new ReusableComponent("Instance", "Base");
 
-            Assert.AreEqual("Instance", reusableComponent.Name);
-            Assert.AreEqual("Base",     reusableComponent.BaseComponentName);
-            Assert.AreEqual("Instance", (reusableComponent as IReusable).Name);
-            Assert.AreEqual("Base",     (reusableComponent as IConnectable).Name);
+            Assert.AreEqual("Instance", reusableComponent.InstanceName);
+            Assert.AreEqual("Base",     reusableComponent.Name);
             Assert.AreEqual(0,          reusableComponent.Connections.Count);
         }
 
