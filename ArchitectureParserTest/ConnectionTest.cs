@@ -2,7 +2,7 @@
 using System;
 
 using ArchitectureParser.Architecture.Components;
-using ArchitectureParser.Architecture.Connections;
+using ArchitectureParser.Architecture.Factories;
 
 namespace ArchitectureParserTest
 {
@@ -14,7 +14,7 @@ namespace ArchitectureParserTest
         {
             var source      = new Component("Source");
             var destination = new Component("Destination");
-            var connection  = new Connection(source, "Output", destination, "Input");
+            var connection  = ConnectionFactory.Create(source, "Output", destination, "Input");
 
             Assert.AreEqual(source, connection.Source);
             Assert.AreEqual("Output", connection.SourceOutput);
@@ -27,7 +27,7 @@ namespace ArchitectureParserTest
         public void ConnectionNullSource()
         {
             var destination = new Component("Destination");
-            var connection = new Connection(null, null, destination, "Input");
+            var connection = ConnectionFactory.Create(null, null, destination, "Input");
         }
 
         [TestMethod]
@@ -35,14 +35,14 @@ namespace ArchitectureParserTest
         public void ConnectionNullDestination()
         {
             var source = new Component("Source");
-            var connection = new Connection(source, "Output", null, null);
+            var connection = ConnectionFactory.Create(source, "Output", null, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConnectionNullSourceAndDestination()
         {
-            var connection = new Connection(null, null, null, null);
+            var connection = ConnectionFactory.Create(null, null, null, null);
         }
     }
 }

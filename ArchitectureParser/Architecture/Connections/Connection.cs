@@ -33,13 +33,8 @@ namespace ArchitectureParser.Architecture.Connections
         }
 
         // The constructor creates a Connection from the source to the destination
-        public Connection(Connectable source = null, string sourceOutput = null, Connectable destination = null, string destinationInput = null)
+        public Connection(Connectable source, string sourceOutput, Connectable destination, string destinationInput)
         {
-            if (source is null)           throw new ArgumentNullException("Cannot connect to null source");
-            if (sourceOutput is null)     throw new ArgumentNullException("Source output must have a name");
-            if (destination is null)      throw new ArgumentNullException("Cannot connect to null destination");
-            if (destinationInput is null) throw new ArgumentNullException("Destination input must have a name");
-
             Source           = source;
             SourceOutput     = sourceOutput;
             Destination      = destination;

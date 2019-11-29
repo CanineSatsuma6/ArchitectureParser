@@ -6,16 +6,16 @@ namespace ArchitectureParser.Architecture.NullObjects
 {
     public class NullComponent : Connectable
     {
-        private NullSet<Connection> m_connections;
+        private NullSet<IConnection> m_connections;
 
-        public override ISet<Connection> Connections
+        public override ISet<IConnection> Connections
         {
             get { return m_connections; }
         }
 
         public NullComponent() : base("")
         {
-            // Do nothing
+            m_connections = new NullSet<IConnection>();
         }
     }
 }

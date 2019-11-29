@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 
+using ArchitectureParser.Architecture.Factories;
+using ArchitectureParser.Architecture.NullObjects;
+
 namespace ArchitectureParser.Architecture.Connections
 {
     public abstract class Connectable
     {
-        private HashSet<Connection> m_connections;
+        private HashSet<IConnection> m_connections;
 
         public string Name
         {
             get;
         }
 
-        public virtual ISet<Connection> Connections
+        public virtual ISet<IConnection> Connections
         {
             get { return m_connections; }
         }
@@ -19,15 +22,18 @@ namespace ArchitectureParser.Architecture.Connections
         public Connectable(string name)
         {
             Name          = name;
-            m_connections = new HashSet<Connection>();
+            m_connections = new HashSet<IConnection>();
         }
 
-        public virtual Connection Connect(Connectable destination, string outputName, string inputName)
+        public IConnection Connect(Connectable destination, string outputName, string inputName)
         {
-            var connection = new Connection(this, outputName, destination, inputName);
+            var connection = ConnectionFactory.Create(this, outputName, destination, inputName);
 
-            Connections.Add(connection);
-            destination.Connections.Add(connection);
+            if (!(connection is NullConnection))
+            {
+                Connections.Add(connection);
+                destination.Connections.Add(connection);
+            }
 
             return connection;
         }

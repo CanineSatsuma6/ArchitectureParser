@@ -50,6 +50,7 @@
     <Compile Include="Architecture\Connections\Connectable.cs" />
     <Compile Include="Architecture\Connections\Connection.cs" />
     <Compile Include="Architecture\Connections\IConnection.cs" />
+    <Compile Include="Architecture\Factories\ConnectionFactory.cs" />
     <Compile Include="Architecture\NullObjects\NullComponent.cs" />
     <Compile Include="Architecture\NullObjects\NullConnection.cs" />
     <Compile Include="Architecture\NullObjects\NullSet.cs" />
@@ -83,5 +84,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
