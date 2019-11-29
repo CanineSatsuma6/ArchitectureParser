@@ -11,7 +11,7 @@ namespace ArchitectureParser.Architecture.Connections
             get;
         }
 
-        public ISet<Connection> Connections
+        public virtual ISet<Connection> Connections
         {
             get { return m_connections; }
         }

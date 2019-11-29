@@ -49,6 +49,8 @@
     <Compile Include="Architecture\Components\ReusableComponent.cs" />
     <Compile Include="Architecture\Connections\Connectable.cs" />
     <Compile Include="Architecture\Connections\Connection.cs" />
+    <Compile Include="Architecture\NullObjects\NullComponent.cs" />
+    <Compile Include="Architecture\NullObjects\NullSet.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
