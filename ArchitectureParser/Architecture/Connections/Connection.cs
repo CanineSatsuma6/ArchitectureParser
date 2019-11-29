@@ -2,7 +2,7 @@
 
 namespace ArchitectureParser.Architecture.Connections
 {
-    public class Connection
+    public class Connection : IConnection
     {
         // The source of the connection
         public Connectable Source
