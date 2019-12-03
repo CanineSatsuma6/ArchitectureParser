@@ -54,6 +54,7 @@
     <Compile Include="Architecture\Connections\IConnection.cs" />
     <Compile Include="Architecture\Exceptions\NoProvidingSourceException.cs" />
     <Compile Include="Architecture\Factories\ComponentFactory.cs" />
+    <Compile Include="Architecture\Factories\CompositionFactory.cs" />
     <Compile Include="Architecture\Factories\ConnectionFactory.cs" />
     <Compile Include="Architecture\NullObjects\NullComponent.cs" />
     <Compile Include="Architecture\NullObjects\NullComposition.cs" />
