@@ -2,7 +2,7 @@
 
 namespace ArchitectureParser.Architecture.Components
 {
-    public class Component : Connectable
+    public class Component : Connectable, IComponent
     {
         public Component(string name) : base(name)
         {

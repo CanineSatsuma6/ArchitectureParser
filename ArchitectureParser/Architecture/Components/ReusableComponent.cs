@@ -2,7 +2,7 @@
 
 namespace ArchitectureParser.Architecture.Components
 {
-    public class ReusableComponent : Connectable
+    public class ReusableComponent : Connectable, IComponent
     {
         public string InstanceName
         {

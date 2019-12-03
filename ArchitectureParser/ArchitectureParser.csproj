@@ -47,11 +47,13 @@
     <Compile Include="Architecture\Components\Component.cs" />
     <Compile Include="Architecture\Components\Composition.cs" />
     <Compile Include="Architecture\Components\CompositionBase.cs" />
+    <Compile Include="Architecture\Components\IComponent.cs" />
     <Compile Include="Architecture\Components\ReusableComponent.cs" />
     <Compile Include="Architecture\Connections\Connectable.cs" />
     <Compile Include="Architecture\Connections\Connection.cs" />
     <Compile Include="Architecture\Connections\IConnection.cs" />
     <Compile Include="Architecture\Exceptions\NoProvidingSourceException.cs" />
+    <Compile Include="Architecture\Factories\ComponentFactory.cs" />
     <Compile Include="Architecture\Factories\ConnectionFactory.cs" />
     <Compile Include="Architecture\NullObjects\NullComponent.cs" />
     <Compile Include="Architecture\NullObjects\NullComposition.cs" />

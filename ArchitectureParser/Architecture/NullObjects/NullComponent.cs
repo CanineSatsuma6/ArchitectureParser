@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 
+using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Connections;
 
 namespace ArchitectureParser.Architecture.NullObjects
 {
-    public class NullComponent : Connectable
+    public class NullComponent : Connectable, IComponent
     {
         private NullSet<IConnection> m_connections;
 
