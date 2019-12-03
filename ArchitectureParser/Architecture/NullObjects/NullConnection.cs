@@ -2,15 +2,14 @@
 
 namespace ArchitectureParser.Architecture.NullObjects
 {
-    public class NullConnection : IConnection
+    public sealed class NullConnection : IConnection
     {
-        private Connectable m_source;
-        private Connectable m_destination;
+        private static NullConnection m_instance;
+        public  static NullConnection Instance { get { return m_instance ?? (m_instance = new NullConnection()); } }
 
-        public Connectable Source
+        public IConnectable Source
         {
-            get { return m_source; }
-            set { }
+            get { return NullComponent.Instance; }
         }
 
         public string SourceOutput
@@ -19,10 +18,9 @@ namespace ArchitectureParser.Architecture.NullObjects
             set { }
         }
 
-        public Connectable Destination
+        public IConnectable Destination
         {
-            get { return m_destination; }
-            set { }
+            get { return NullComponent.Instance; }
         }
 
         public string DestinationInput
@@ -31,10 +29,14 @@ namespace ArchitectureParser.Architecture.NullObjects
             set { }
         }
 
-        public NullConnection()
+        private NullConnection()
         {
-            m_source      = new NullComponent();
-            m_destination = new NullComponent();
+            // Do nothing. Hide public default constructor
+        }
+
+        public void Connect()
+        {
+            return;
         }
     }
 }

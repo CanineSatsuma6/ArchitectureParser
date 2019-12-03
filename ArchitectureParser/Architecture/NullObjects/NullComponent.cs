@@ -5,18 +5,31 @@ using ArchitectureParser.Architecture.Connections;
 
 namespace ArchitectureParser.Architecture.NullObjects
 {
-    public class NullComponent : Connectable, IComponent
+    public sealed class NullComponent : IComponent
     {
+        private static NullComponent m_instance;
+        public  static NullComponent Instance { get { return m_instance ?? (m_instance = new NullComponent()); } }
+
         private NullSet<IConnection> m_connections;
 
-        public override ISet<IConnection> Connections
+        public string Name
+        {
+            get { return string.Empty; }
+        }
+
+        public ISet<IConnection> Connections
         {
             get { return m_connections; }
         }
 
-        public NullComponent() : base("")
+        private NullComponent()
         {
             m_connections = new NullSet<IConnection>();
+        }
+
+        public IConnection Connect(IConnectable destination, string outputName, string inputName)
+        {
+            return NullConnection.Instance;
         }
     }
 }

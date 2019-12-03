@@ -1,17 +1,42 @@
-﻿using ArchitectureParser.Architecture.Connections;
+﻿using System.Collections.Generic;
+
+using ArchitectureParser.Architecture.Connections;
+using ArchitectureParser.Architecture.Factories;
 
 namespace ArchitectureParser.Architecture.Components
 {
-    public class ReusableComponent : Connectable, IComponent
+    public class ReusableComponent : IComponent
     {
+        private HashSet<IConnection> m_connections;
+
+        public string Name
+        {
+            get;
+        }
+
         public string InstanceName
         {
             get;
         }
+
+        public ISet<IConnection> Connections
+        {
+            get { return m_connections; }
+        }
         
-        public ReusableComponent(string instanceName, string baseComponentName) : base(baseComponentName)
+        public ReusableComponent(string instanceName, string baseComponentName)
         {
             InstanceName = instanceName;
+            Name         = baseComponentName;
+        }
+
+        public IConnection Connect(IConnectable destination, string outputName, string inputName)
+        {
+            var connection = ConnectionFactory.Create(this, outputName, destination, inputName);
+
+            connection.Connect();
+
+            return connection;
         }
 
         public override string ToString()

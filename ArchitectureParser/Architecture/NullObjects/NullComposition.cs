@@ -5,27 +5,41 @@ using ArchitectureParser.Architecture.Connections;
 
 namespace ArchitectureParser.Architecture.NullObjects
 {
-    public class NullComposition : CompositionBase
+    public sealed class NullComposition : IComposition
     {
-        private NullSet<Connectable> m_contents;
-        private NullSet<IConnection> m_connections;
+        private static NullComposition m_instance;
+        public  static NullComposition Instance { get { return m_instance ?? (m_instance = new NullComposition()); } }
 
-        public override ISet<Connectable> Contents
+        private NullSet<IConnectable> m_contents;
+        private NullSet<IConnection>  m_connections;
+
+        public string Name
+        {
+            get { return string.Empty; }
+        }
+
+        public ISet<IConnectable> Contents
         {
             get { return m_contents; }
         }
 
-        public override ISet<IConnection> Connections
+        public ISet<IConnection> Connections
         {
             get { return m_connections; }
         }
 
-        public NullComposition() : base(string.Empty)
+        public NullComposition()
         {
-            m_contents = new NullSet<Connectable>();
+            m_contents    = new NullSet<IConnectable>();
+            m_connections = new NullSet<IConnection>();
         }
 
-        public override void ConsolidateConnections()
+        public IConnection Connect(IConnectable destination, string outputName, string inputName)
+        {
+            return NullConnection.Instance;
+        }
+
+        public void ConsolidateConnections()
         {
             return;
         }

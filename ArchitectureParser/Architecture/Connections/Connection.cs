@@ -1,21 +1,17 @@
-﻿using System;
-
-namespace ArchitectureParser.Architecture.Connections
+﻿namespace ArchitectureParser.Architecture.Connections
 {
     public class Connection : IConnection
     {
         // The source of the connection
-        public Connectable Source
+        public IConnectable Source
         {
             get;
-            set;
         }
 
         // The destination of the connection
-        public Connectable Destination
+        public IConnectable Destination
         {
             get;
-            set;
         }
 
         // The name of the output of the Source
@@ -33,7 +29,7 @@ namespace ArchitectureParser.Architecture.Connections
         }
 
         // The constructor creates a Connection from the source to the destination
-        public Connection(Connectable source, string sourceOutput, Connectable destination, string destinationInput)
+        public Connection(IConnectable source, string sourceOutput, IConnectable destination, string destinationInput)
         {
             Source           = source;
             SourceOutput     = sourceOutput;
@@ -41,9 +37,15 @@ namespace ArchitectureParser.Architecture.Connections
             DestinationInput = destinationInput;
         }
 
+        public void Connect()
+        {
+            Source.Connections.Add(this);
+            Destination.Connections.Add(this);
+        }
+
         public override string ToString()
         {
-            return string.Format("{{{0}.{1}, {2}.{3}}}", Source.Name, SourceOutput, Destination.Name, DestinationInput);
+            return string.Format("{{{0}.{1}, {2}.{3}}}", Source.ToString(), SourceOutput, Destination.ToString(), DestinationInput);
         }
     }
 }

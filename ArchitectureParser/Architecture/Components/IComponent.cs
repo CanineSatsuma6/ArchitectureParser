@@ -1,7 +1,9 @@
-﻿namespace ArchitectureParser.Architecture.Components
+﻿using ArchitectureParser.Architecture.Connections;
+
+namespace ArchitectureParser.Architecture.Components
 {
-    public interface IComponent
+    public interface IComponent : IConnectable
     {
-        // Everything is handled by connectable
+        string Name { get; }
     }
 }

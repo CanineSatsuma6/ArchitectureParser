@@ -5,9 +5,9 @@ namespace ArchitectureParser.Architecture.Factories
 {
     public static class CompositionFactory
     {
-        public static CompositionBase Create(string name)
+        public static IComposition Create(string name)
         {
-            CompositionBase composition;
+            IComposition composition;
 
             if (string.IsNullOrWhiteSpace(name))
             {

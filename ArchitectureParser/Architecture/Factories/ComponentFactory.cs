@@ -11,12 +11,12 @@ namespace ArchitectureParser.Architecture.Factories
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                component = new NullComponent();
+                component = NullComponent.Instance;
             }
 
-            else if (name.Replace("<br>", " ").Contains(" "))
+            else if (name.Replace("<br>", " ").Replace("\r", "").Replace("\n", " ").Contains(" "))
             {
-                var nameParts = name.Replace("<br>", " ").Split();
+                var nameParts = name.Replace("<br>", " ").Replace("\r", "").Replace("\n", " ").Split();
                 var instanceName = nameParts[0];
                 var componentName = nameParts[1];
 

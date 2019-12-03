@@ -2,9 +2,11 @@
 {
     public interface IConnection
     {
-        Connectable Source           { get; set; }
-        string      SourceOutput     { get; set; }
-        Connectable Destination      { get; set; }
-        string      DestinationInput { get; set; }
+        IConnectable Source           { get; }
+        string       SourceOutput     { get; set; }
+        IConnectable Destination      { get; }
+        string       DestinationInput { get; set; }
+
+        void Connect();
     }
 }
