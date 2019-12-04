@@ -2,7 +2,6 @@
 
 using ArchitectureParser.Architecture.Connections;
 using ArchitectureParser.Architecture.Factories;
-using ArchitectureParser.Architecture.NullObjects;
 
 namespace ArchitectureParser.Architecture.Components
 {
