@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Connections;
+using ArchitectureParser.Architecture.NullObjects;
 
-namespace ArchitectureParser.Architecture.NullObjects
+namespace ArchitectureParser.Architecture.Compositions
 {
     public sealed class NullComposition : IComposition
     {

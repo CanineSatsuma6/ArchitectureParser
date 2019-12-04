@@ -2,7 +2,8 @@
 
 using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Factories;
-using ArchitectureParser.Architecture.NullObjects;
+using ArchitectureParser.Architecture.ReusableComponents;
+using ArchitectureParser.Architecture.Connections;
 
 namespace ArchitectureParserTest
 {

@@ -4,6 +4,7 @@ using System.Linq;
 using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Factories;
 using ArchitectureParser.Architecture.Exceptions;
+using ArchitectureParser.Architecture.Compositions;
 
 namespace ArchitectureParserTest
 {

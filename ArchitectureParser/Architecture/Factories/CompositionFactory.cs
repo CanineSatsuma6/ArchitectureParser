@@ -1,5 +1,4 @@
-﻿using ArchitectureParser.Architecture.Components;
-using ArchitectureParser.Architecture.NullObjects;
+﻿using ArchitectureParser.Architecture.Compositions;
 
 namespace ArchitectureParser.Architecture.Factories
 {

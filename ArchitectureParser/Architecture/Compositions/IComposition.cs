@@ -2,7 +2,7 @@
 
 using ArchitectureParser.Architecture.Connections;
 
-namespace ArchitectureParser.Architecture.Components
+namespace ArchitectureParser.Architecture.Compositions
 {
     public interface IComposition : IConnectable
     {

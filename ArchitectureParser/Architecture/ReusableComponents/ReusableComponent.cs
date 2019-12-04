@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 
+using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Connections;
 using ArchitectureParser.Architecture.Factories;
 
-namespace ArchitectureParser.Architecture.Components
+namespace ArchitectureParser.Architecture.ReusableComponents
 {
     public class ReusableComponent : IComponent
     {

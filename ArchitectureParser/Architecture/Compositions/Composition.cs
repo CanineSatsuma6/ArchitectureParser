@@ -5,7 +5,7 @@ using ArchitectureParser.Architecture.Connections;
 using ArchitectureParser.Architecture.Exceptions;
 using ArchitectureParser.Architecture.Factories;
 
-namespace ArchitectureParser.Architecture.Components
+namespace ArchitectureParser.Architecture.Compositions
 {
     public class Composition : IComposition
     {

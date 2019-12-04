@@ -45,10 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Architecture\Components\Component.cs" />
-    <Compile Include="Architecture\Components\Composition.cs" />
+    <Compile Include="Architecture\Compositions\Composition.cs" />
     <Compile Include="Architecture\Components\IComponent.cs" />
-    <Compile Include="Architecture\Components\IComposition.cs" />
-    <Compile Include="Architecture\Components\ReusableComponent.cs" />
+    <Compile Include="Architecture\Compositions\IComposition.cs" />
+    <Compile Include="Architecture\ReusableComponents\ReusableComponent.cs" />
     <Compile Include="Architecture\Connections\Connection.cs" />
     <Compile Include="Architecture\Connections\IConnectable.cs" />
     <Compile Include="Architecture\Connections\IConnection.cs" />
@@ -56,9 +56,9 @@
     <Compile Include="Architecture\Factories\ComponentFactory.cs" />
     <Compile Include="Architecture\Factories\CompositionFactory.cs" />
     <Compile Include="Architecture\Factories\ConnectionFactory.cs" />
-    <Compile Include="Architecture\NullObjects\NullComponent.cs" />
-    <Compile Include="Architecture\NullObjects\NullComposition.cs" />
-    <Compile Include="Architecture\NullObjects\NullConnection.cs" />
+    <Compile Include="Architecture\Components\NullComponent.cs" />
+    <Compile Include="Architecture\Compositions\NullComposition.cs" />
+    <Compile Include="Architecture\Connections\NullConnection.cs" />
     <Compile Include="Architecture\NullObjects\NullSet.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

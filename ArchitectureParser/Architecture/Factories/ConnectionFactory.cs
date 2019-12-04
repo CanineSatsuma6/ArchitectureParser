@@ -1,5 +1,4 @@
 ﻿using ArchitectureParser.Architecture.Connections;
-using ArchitectureParser.Architecture.NullObjects;
 
 namespace ArchitectureParser.Architecture.Factories
 {
