@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 
-using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Connections;
 using ArchitectureParser.Architecture.Factories;
 
 namespace ArchitectureParser.Architecture.ReusableComponents
 {
-    public class ReusableComponent : IComponent
+    public class ReusableComponent : IReusableComponent
     {
         private HashSet<IConnection> m_connections;
 
-        public string Name
+        public string BaseComponentName
         {
             get;
         }
@@ -27,9 +26,9 @@ namespace ArchitectureParser.Architecture.ReusableComponents
         
         public ReusableComponent(string instanceName, string baseComponentName)
         {
-            InstanceName  = instanceName;
-            Name          = baseComponentName;
-            m_connections = new HashSet<IConnection>();
+            InstanceName      = instanceName;
+            BaseComponentName = baseComponentName;
+            m_connections     = new HashSet<IConnection>();
         }
 
         public IConnection Connect(IConnectable destination, string outputName, string inputName)
@@ -43,7 +42,7 @@ namespace ArchitectureParser.Architecture.ReusableComponents
 
         public override string ToString()
         {
-            return string.Format("{0} ({1})", InstanceName, Name);
+            return string.Format("{0} ({1})", InstanceName, BaseComponentName);
         }
     }
 }
