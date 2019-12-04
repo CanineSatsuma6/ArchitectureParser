@@ -2,7 +2,8 @@
 
 using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Factories;
-using ArchitectureParser.Architecture.NullObjects;
+using ArchitectureParser.Architecture.ReusableComponents;
+using ArchitectureParser.Architecture.Connections;
 
 namespace ArchitectureParserTest
 {
@@ -17,35 +18,34 @@ namespace ArchitectureParserTest
         private static string InputName  = @"Input";
         private static string OutputName = @"Output";
 
-        private static IComponent ComponentBreak()   => ComponentFactory.Create(string.Format("{0}<br>{1}", InstanceName, BaseName));
-        private static IComponent ComponentNewline() => ComponentFactory.Create(string.Format("{0}\n{1}", InstanceName, BaseName));
+        private static IReusableComponent ReusableComponent() => ReusableComponentFactory.Create(InstanceName, BaseName);
 
         private static IComponent Component() => ComponentFactory.Create(ComponentName);
 
         [TestMethod]
         public void ReusableComponentConstructor()
         {
-            var reusableComponent = ComponentBreak() as ReusableComponent;
+            var reusableComponent = ReusableComponent();
 
             Assert.AreEqual(InstanceName, reusableComponent.InstanceName);
-            Assert.AreEqual(BaseName,     reusableComponent.Name);
+            Assert.AreEqual(BaseName,     reusableComponent.BaseComponentName);
             Assert.AreEqual(0,            reusableComponent.Connections.Count);
         }
 
         [TestMethod]
         public void ReusableComponentConstructor2()
         {
-            var reusableComponent = ComponentNewline() as ReusableComponent;
+            var reusableComponent = ReusableComponent();
 
             Assert.AreEqual(InstanceName, reusableComponent.InstanceName);
-            Assert.AreEqual(BaseName, reusableComponent.Name);
+            Assert.AreEqual(BaseName, reusableComponent.BaseComponentName);
             Assert.AreEqual(0, reusableComponent.Connections.Count);
         }
 
         [TestMethod]
         public void ReusableComponentConnect()
         {
-            var reusableComponent = ComponentBreak() as ReusableComponent;
+            var reusableComponent = ReusableComponent();
             var component         = Component();
             var connection        = reusableComponent.Connect(component, OutputName, InputName);
 
@@ -60,7 +60,7 @@ namespace ArchitectureParserTest
         [TestMethod]
         public void ReusableComponentConnectToNullDestination()
         {
-            var reusableComponent = ComponentBreak() as ReusableComponent;
+            var reusableComponent = ReusableComponent();
             var connection = reusableComponent.Connect(null, OutputName, null);
 
             Assert.IsTrue(connection is NullConnection);

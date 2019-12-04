@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Connections;
+using ArchitectureParser.Architecture.NullObjects;
 
-namespace ArchitectureParser.Architecture.NullObjects
+namespace ArchitectureParser.Architecture.Components
 {
     public sealed class NullComponent : IComponent
     {
@@ -30,6 +30,11 @@ namespace ArchitectureParser.Architecture.NullObjects
         public IConnection Connect(IConnectable destination, string outputName, string inputName)
         {
             return NullConnection.Instance;
+        }
+
+        public override string ToString()
+        {
+            return "Null Component";
         }
     }
 }

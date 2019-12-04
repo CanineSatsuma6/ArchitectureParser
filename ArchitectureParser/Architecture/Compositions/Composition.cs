@@ -5,7 +5,7 @@ using ArchitectureParser.Architecture.Connections;
 using ArchitectureParser.Architecture.Exceptions;
 using ArchitectureParser.Architecture.Factories;
 
-namespace ArchitectureParser.Architecture.Components
+namespace ArchitectureParser.Architecture.Compositions
 {
     public class Composition : IComposition
     {
@@ -139,6 +139,11 @@ namespace ArchitectureParser.Architecture.Components
             // Remove all connections and content from the composition
             Connections.Clear();
             Contents.Clear();
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

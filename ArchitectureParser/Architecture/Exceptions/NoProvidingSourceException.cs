@@ -18,5 +18,10 @@ namespace ArchitectureParser.Architecture.Exceptions
         {
 
         }
+
+        public override string ToString()
+        {
+            return Message;
+        }
     }
 }

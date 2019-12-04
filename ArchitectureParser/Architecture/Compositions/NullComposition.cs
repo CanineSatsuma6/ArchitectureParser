@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Connections;
+using ArchitectureParser.Architecture.NullObjects;
 
-namespace ArchitectureParser.Architecture.NullObjects
+namespace ArchitectureParser.Architecture.Compositions
 {
     public sealed class NullComposition : IComposition
     {
@@ -42,6 +42,11 @@ namespace ArchitectureParser.Architecture.NullObjects
         public void ConsolidateConnections()
         {
             return;
+        }
+
+        public override string ToString()
+        {
+            return "Null Composition";
         }
     }
 }

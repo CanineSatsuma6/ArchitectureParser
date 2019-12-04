@@ -1,6 +1,6 @@
-﻿using ArchitectureParser.Architecture.Connections;
+﻿using ArchitectureParser.Architecture.Components;
 
-namespace ArchitectureParser.Architecture.NullObjects
+namespace ArchitectureParser.Architecture.Connections
 {
     public sealed class NullConnection : IConnection
     {
@@ -37,6 +37,11 @@ namespace ArchitectureParser.Architecture.NullObjects
         public void Connect()
         {
             return;
+        }
+
+        public override string ToString()
+        {
+            return "Null Connection";
         }
     }
 }
