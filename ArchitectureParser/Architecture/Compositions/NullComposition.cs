@@ -43,5 +43,10 @@ namespace ArchitectureParser.Architecture.Compositions
         {
             return;
         }
+
+        public override string ToString()
+        {
+            return "Null Composition";
+        }
     }
 }

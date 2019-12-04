@@ -140,5 +140,10 @@ namespace ArchitectureParser.Architecture.Compositions
             Connections.Clear();
             Contents.Clear();
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

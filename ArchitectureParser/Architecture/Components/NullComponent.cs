@@ -31,5 +31,10 @@ namespace ArchitectureParser.Architecture.Components
         {
             return NullConnection.Instance;
         }
+
+        public override string ToString()
+        {
+            return "Null Component";
+        }
     }
 }

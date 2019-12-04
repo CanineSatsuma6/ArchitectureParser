@@ -38,5 +38,10 @@ namespace ArchitectureParser.Architecture.Connections
         {
             return;
         }
+
+        public override string ToString()
+        {
+            return "Null Connection";
+        }
     }
 }
