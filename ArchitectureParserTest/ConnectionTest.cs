@@ -1,48 +1,61 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Factories;
+using ArchitectureParser.Architecture.NullObjects;
 
 namespace ArchitectureParserTest
 {
     [TestClass]
     public class ConnectionTest
     {
+        private static string SourceName      = @"Source";
+        private static string DestinationName = @"Destination";
+        private static string OutputName      = @"Output";
+        private static string InputName       = @"Input";
+
+        private static IComponent Source()      => ComponentFactory.Create(SourceName);
+        private static IComponent Destination() => ComponentFactory.Create(DestinationName);
+
         [TestMethod]
         public void ConnectionConstructor()
         {
-            var source      = new Component("Source");
-            var destination = new Component("Destination");
-            var connection  = ConnectionFactory.Create(source, "Output", destination, "Input");
+            var source      = Source();
+            var destination = Destination();
+            var connection  = ConnectionFactory.Create(source, OutputName, destination, InputName);
 
             Assert.AreEqual(source, connection.Source);
-            Assert.AreEqual("Output", connection.SourceOutput);
+            Assert.AreEqual(OutputName, connection.SourceOutput);
             Assert.AreEqual(destination, connection.Destination);
-            Assert.AreEqual("Input", connection.DestinationInput);
+            Assert.AreEqual(InputName, connection.DestinationInput);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConnectionNullSource()
         {
-            var destination = new Component("Destination");
-            var connection = ConnectionFactory.Create(null, null, destination, "Input");
+            var destination = Destination();
+            var connection = ConnectionFactory.Create(null, null, destination, InputName);
+
+            Assert.IsTrue(connection is NullConnection);
+            Assert.AreEqual(0, destination.Connections.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConnectionNullDestination()
         {
-            var source = new Component("Source");
-            var connection = ConnectionFactory.Create(source, "Output", null, null);
+            var source = Source();
+            var connection = ConnectionFactory.Create(source, OutputName, null, null);
+
+            Assert.IsTrue(connection is NullConnection);
+            Assert.AreEqual(0, source.Connections.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConnectionNullSourceAndDestination()
         {
             var connection = ConnectionFactory.Create(null, null, null, null);
+
+            Assert.IsTrue(connection is NullConnection);
         }
     }
 }

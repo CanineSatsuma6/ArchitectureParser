@@ -26,8 +26,9 @@ namespace ArchitectureParser.Architecture.Components
         
         public ReusableComponent(string instanceName, string baseComponentName)
         {
-            InstanceName = instanceName;
-            Name         = baseComponentName;
+            InstanceName  = instanceName;
+            Name          = baseComponentName;
+            m_connections = new HashSet<IConnection>();
         }
 
         public IConnection Connect(IConnectable destination, string outputName, string inputName)
