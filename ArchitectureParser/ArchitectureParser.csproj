@@ -48,6 +48,7 @@
     <Compile Include="Architecture\Compositions\Composition.cs" />
     <Compile Include="Architecture\Components\IComponent.cs" />
     <Compile Include="Architecture\Compositions\IComposition.cs" />
+    <Compile Include="Architecture\ReusableComponents\IReusableComponent.cs" />
     <Compile Include="Architecture\ReusableComponents\ReusableComponent.cs" />
     <Compile Include="Architecture\Connections\Connection.cs" />
     <Compile Include="Architecture\Connections\IConnectable.cs" />
