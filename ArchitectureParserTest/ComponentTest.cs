@@ -1,29 +1,39 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 using ArchitectureParser.Architecture.Components;
+using ArchitectureParser.Architecture.Factories;
+using ArchitectureParser.Architecture.NullObjects;
 
 namespace ArchitectureParserTest
 {
     [TestClass]
     public class ComponentTest
     {
+        private static string TestComponentName        = @"Test";
+        private static string DestinationComponentName = @"Destination";
+
+        private static string OutputName = @"Output";
+        private static string InputName  = @"Input";
+
+        private static IComponent TestComponent()        => ComponentFactory.Create(TestComponentName);
+        private static IComponent DestinationComponent() => ComponentFactory.Create(DestinationComponentName);
+
         [TestMethod]
         public void ComponentConstructor()
         {
-            var component = new Component("Test");
+            var component = TestComponent();
 
-            Assert.AreEqual("Test", component.Name);
-            Assert.AreEqual(0,      component.Connections.Count);
+            Assert.AreEqual(TestComponentName, component.Name);
+            Assert.AreEqual(0,                 component.Connections.Count);
         }
 
         [TestMethod]
         public void ComponentConnect()
         {
-            var component = new Component("Test");
-            var destination = new Component("Destination");
+            var component   = TestComponent();
+            var destination = DestinationComponent();
 
-            var connection = component.Connect(destination, "Output", "Input");
+            var connection = component.Connect(destination, OutputName, InputName);
 
             Assert.AreEqual(component, connection.Source);
             Assert.AreEqual(destination, connection.Destination);
@@ -34,11 +44,13 @@ namespace ArchitectureParserTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ComponentConnectToNullDestination()
         {
-            var component = new Component("Test");
+            var component  = TestComponent();
             var connection = component.Connect(null, null, null);
+
+            Assert.IsTrue(connection is NullConnection);
+            Assert.AreEqual(0, component.Connections.Count);
         }
     }
 }

@@ -1,20 +1,36 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 using ArchitectureParser.Architecture.Components;
+using ArchitectureParser.Architecture.Factories;
+using ArchitectureParser.Architecture.Exceptions;
 
 namespace ArchitectureParserTest
 {
     [TestClass]
     public class CompositionTest
     {
+        private static string CompositionName       = @"Composition";
+        private static string ExternalBeforeName    = @"Before";
+        private static string ExternalAfterName     = @"After";
+        private static string InternalComponentName = @"Internal";
+
+        private static string OutputName            = @"Output";
+        private static string InputName             = @"Input";
+        private static string CompositionOutputName = @"CompositionOutput";
+        private static string CompositionInputName  = @"CompositionInput";
+
+        public static IComposition Composition()       => CompositionFactory.Create(CompositionName);
+        public static IComponent   ExternalBefore()    => ComponentFactory.Create(ExternalBeforeName);
+        public static IComponent   ExternalAfter()     => ComponentFactory.Create(ExternalAfterName);
+        public static IComponent   InternalComponent() => ComponentFactory.Create(InternalComponentName);
+
         [TestMethod]
         public void CompositionConstructor()
         {
-            var composition = new Composition("Composition");
+            var composition = Composition();
 
-            Assert.AreEqual("Composition", composition.Name);
+            Assert.AreEqual(CompositionName, composition.Name);
             Assert.AreEqual(0,             composition.Connections.Count);
             Assert.AreEqual(0,             composition.Contents.Count);
         }
@@ -22,10 +38,10 @@ namespace ArchitectureParserTest
         [TestMethod]
         public void CompositionConnect()
         {
-            var composition = new Composition("Composition");
-            var externalComponent = new Component("Component");
+            var composition       = Composition();
+            var externalComponent = ExternalBefore();
 
-            var connection = composition.Connect(externalComponent, "Output", "Input");
+            var connection = composition.Connect(externalComponent, OutputName, InputName);
 
             Assert.AreEqual(composition, connection.Source);
             Assert.AreEqual(externalComponent, connection.Destination);
@@ -39,14 +55,14 @@ namespace ArchitectureParserTest
         [TestMethod]
         public void CompositionConsolidateExternalToInternal()
         {
-            var externalComponent = new Component("External");
-            var internalComponent = new Component("Internal");
-            var composition       = new Composition("Composition");
+            var externalComponent = ExternalBefore();
+            var internalComponent = InternalComponent();
+            var composition       = Composition();
 
             composition.Contents.Add(internalComponent);
 
-            externalComponent.Connect(composition, "Output", "CompositionInput");
-            composition.Connect(internalComponent, "CompositionInput", "Input");
+            externalComponent.Connect(composition, OutputName, CompositionInputName);
+            composition.Connect(internalComponent, CompositionInputName, InputName);
 
             composition.ConsolidateConnections();
 
@@ -59,8 +75,8 @@ namespace ArchitectureParserTest
 
             Assert.AreEqual(externalComponent, connection.Source);
             Assert.AreEqual(internalComponent, connection.Destination);
-            Assert.AreEqual("Output", connection.SourceOutput);
-            Assert.AreEqual("Input", connection.DestinationInput);
+            Assert.AreEqual(OutputName, connection.SourceOutput);
+            Assert.AreEqual(InputName, connection.DestinationInput);
             Assert.IsTrue(externalComponent.Connections.Contains(connection));
             Assert.IsTrue(internalComponent.Connections.Contains(connection));
         }
@@ -68,14 +84,14 @@ namespace ArchitectureParserTest
         [TestMethod]
         public void CompositionConsolidateInternalToExternal()
         {
-            var externalComponent = new Component("External");
-            var internalComponent = new Component("Internal");
-            var composition       = new Composition("Composition");
+            var externalComponent = ExternalAfter();
+            var internalComponent = InternalComponent();
+            var composition       = Composition();
 
             composition.Contents.Add(internalComponent);
 
-            internalComponent.Connect(composition, "Output", "CompositionOutput");
-            composition.Connect(externalComponent, "CompositionOutput", "Input");
+            internalComponent.Connect(composition, OutputName, CompositionOutputName);
+            composition.Connect(externalComponent, CompositionOutputName, InputName);
 
             composition.ConsolidateConnections();
 
@@ -88,8 +104,8 @@ namespace ArchitectureParserTest
 
             Assert.AreEqual(externalComponent, connection.Destination);
             Assert.AreEqual(internalComponent, connection.Source);
-            Assert.AreEqual("Output", connection.SourceOutput);
-            Assert.AreEqual("Input", connection.DestinationInput);
+            Assert.AreEqual(OutputName, connection.SourceOutput);
+            Assert.AreEqual(InputName, connection.DestinationInput);
             Assert.IsTrue(externalComponent.Connections.Contains(connection));
             Assert.IsTrue(internalComponent.Connections.Contains(connection));
         }
@@ -97,18 +113,18 @@ namespace ArchitectureParserTest
         [TestMethod]
         public void CompositionConsolidateChain()
         {
-            var externalBefore    = new Component("Before");
-            var internalComponent = new Component("Internal");
-            var externalAfter     = new Component("After");
-            var composition       = new Composition("Composition");
+            var externalBefore    = ExternalBefore();
+            var internalComponent = InternalComponent();
+            var externalAfter     = ExternalAfter();
+            var composition       = Composition();
 
             composition.Contents.Add(internalComponent);
 
-            externalBefore.Connect(composition, "Output", "CompositionInput");
-            composition.Connect(internalComponent, "CompositionInput", "Input");
+            externalBefore.Connect(composition, OutputName, CompositionInputName);
+            composition.Connect(internalComponent, CompositionInputName, InputName);
 
-            internalComponent.Connect(composition, "Output", "CompositionOutput");
-            composition.Connect(externalAfter, "CompositionOutput", "Input");
+            internalComponent.Connect(composition, OutputName, CompositionOutputName);
+            composition.Connect(externalAfter, CompositionOutputName, InputName);
 
             composition.ConsolidateConnections();
 
@@ -123,15 +139,15 @@ namespace ArchitectureParserTest
 
             Assert.AreEqual(internalComponent, connectionBefore.Destination);
             Assert.AreEqual(externalBefore, connectionBefore.Source);
-            Assert.AreEqual("Output", connectionBefore.SourceOutput);
-            Assert.AreEqual("Input", connectionBefore.DestinationInput);
+            Assert.AreEqual(OutputName, connectionBefore.SourceOutput);
+            Assert.AreEqual(InputName, connectionBefore.DestinationInput);
             Assert.IsTrue(externalBefore.Connections.Contains(connectionBefore));
             Assert.IsTrue(internalComponent.Connections.Contains(connectionBefore));
 
             Assert.AreEqual(externalAfter, connectionAfter.Destination);
             Assert.AreEqual(internalComponent, connectionAfter.Source);
-            Assert.AreEqual("Output", connectionAfter.SourceOutput);
-            Assert.AreEqual("Input", connectionAfter.DestinationInput);
+            Assert.AreEqual(OutputName, connectionAfter.SourceOutput);
+            Assert.AreEqual(InputName, connectionAfter.DestinationInput);
             Assert.IsTrue(externalAfter.Connections.Contains(connectionAfter));
             Assert.IsTrue(internalComponent.Connections.Contains(connectionAfter));
         }
@@ -139,13 +155,13 @@ namespace ArchitectureParserTest
         [TestMethod]
         public void CompositionConsolidatePassThrough()
         {
-            var externalBefore = new Component("Before");
-            var externalAfter  = new Component("After");
-            var composition    = new Composition("Composition");
+            var externalBefore = ExternalBefore();
+            var externalAfter  = ExternalAfter();
+            var composition    = Composition();
 
-            externalBefore.Connect(composition, "Output", "CompositionInput");
-            composition.Connect(composition, "CompositionInput", "CompositionOutput");
-            composition.Connect(externalAfter, "CompositionOutput", "Input");
+            externalBefore.Connect(composition, OutputName, CompositionInputName);
+            composition.Connect(composition, CompositionInputName, CompositionOutputName);
+            composition.Connect(externalAfter, CompositionOutputName, InputName);
 
             composition.ConsolidateConnections();
 
@@ -158,33 +174,33 @@ namespace ArchitectureParserTest
 
             Assert.AreEqual(externalBefore, connection.Source);
             Assert.AreEqual(externalAfter, connection.Destination);
-            Assert.AreEqual("Output", connection.SourceOutput);
-            Assert.AreEqual("Input", connection.DestinationInput);
+            Assert.AreEqual(OutputName, connection.SourceOutput);
+            Assert.AreEqual(InputName, connection.DestinationInput);
             Assert.IsTrue(externalBefore.Connections.Contains(connection));
             Assert.IsTrue(externalAfter.Connections.Contains(connection));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(NoProvidingSourceException))]
         public void CompositionNoExternalInputProvider()
         {
-            var internalComponent = new Component("Internal");
-            var composition       = new Composition("Composition");
+            var internalComponent = InternalComponent();
+            var composition       = Composition();
 
             composition.Contents.Add(internalComponent);
-            composition.Connect(internalComponent, "CompositionInput", "Input");
+            composition.Connect(internalComponent, CompositionInputName, InputName);
 
             composition.ConsolidateConnections();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(NoProvidingSourceException))]
         public void CompositionNoInternalInputProvider()
         {
-            var externalComponent = new Component("External");
-            var composition       = new Composition("Composition");
+            var externalComponent = ExternalAfter();
+            var composition       = Composition();
 
-            composition.Connect(externalComponent, "CompositionOutput", "Input");
+            composition.Connect(externalComponent, CompositionOutputName, InputName);
 
             composition.ConsolidateConnections();
         }

@@ -1,21 +1,17 @@
-﻿using System;
-
-namespace ArchitectureParser.Architecture.Connections
+﻿namespace ArchitectureParser.Architecture.Connections
 {
-    public class Connection
+    public class Connection : IConnection
     {
         // The source of the connection
-        public Connectable Source
+        public IConnectable Source
         {
             get;
-            set;
         }
 
         // The destination of the connection
-        public Connectable Destination
+        public IConnectable Destination
         {
             get;
-            set;
         }
 
         // The name of the output of the Source
@@ -33,22 +29,23 @@ namespace ArchitectureParser.Architecture.Connections
         }
 
         // The constructor creates a Connection from the source to the destination
-        public Connection(Connectable source = null, string sourceOutput = null, Connectable destination = null, string destinationInput = null)
+        public Connection(IConnectable source, string sourceOutput, IConnectable destination, string destinationInput)
         {
-            if (source is null)           throw new ArgumentNullException("Cannot connect to null source");
-            if (sourceOutput is null)     throw new ArgumentNullException("Source output must have a name");
-            if (destination is null)      throw new ArgumentNullException("Cannot connect to null destination");
-            if (destinationInput is null) throw new ArgumentNullException("Destination input must have a name");
-
             Source           = source;
             SourceOutput     = sourceOutput;
             Destination      = destination;
             DestinationInput = destinationInput;
         }
 
+        public void Connect()
+        {
+            Source.Connections.Add(this);
+            Destination.Connections.Add(this);
+        }
+
         public override string ToString()
         {
-            return string.Format("{{{0}.{1}, {2}.{3}}}", Source.Name, SourceOutput, Destination.Name, DestinationInput);
+            return string.Format("{{{0}.{1}, {2}.{3}}}", Source.ToString(), SourceOutput, Destination.ToString(), DestinationInput);
         }
     }
 }
