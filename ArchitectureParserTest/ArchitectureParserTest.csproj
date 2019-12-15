@@ -54,6 +54,7 @@
     <Compile Include="ConnectionTest.cs" />
     <Compile Include="ReusableComponentTest.cs" />
     <Compile Include="CompositionTest.cs" />
+    <Compile Include="ConnectionTypeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
