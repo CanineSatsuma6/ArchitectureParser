@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 using ArchitectureParser.Architecture.Connections;
+using ArchitectureParser.Architecture.Connections.Types;
 using ArchitectureParser.Architecture.Exceptions;
 using ArchitectureParser.Architecture.Factories;
 
@@ -34,13 +36,18 @@ namespace ArchitectureParser.Architecture.Compositions
             m_connections = new HashSet<IConnection>();
         }
 
-        public IConnection Connect(IConnectable destination, string outputName, string inputName)
+        public IConnection Connect(IConnectable destination, string outputName, string inputName, Color type)
         {
-            var connection = ConnectionFactory.Create(this, outputName, destination, inputName);
+            var connection = ConnectionFactory.Create(this, outputName, destination, inputName, type);
 
             connection.Connect();
 
             return connection;
+        }
+
+        public IConnection Connect(IConnectable destination, string outputName, string inputName, IConnectionType type)
+        {
+            return Connect(destination, outputName, inputName, ConnectionTypeFactory.GetColor(type));
         }
 
         public void ConsolidateConnections()
@@ -105,7 +112,7 @@ namespace ArchitectureParser.Architecture.Compositions
                     // Connect the source to the current destination and remove the destination's connection to the composition
                     foreach (var trueDestination in trueDestinations)
                     {
-                        connection.Source.Connect(trueDestination.Destination, connection.SourceOutput, trueDestination.DestinationInput);
+                        connection.Source.Connect(trueDestination.Destination, connection.SourceOutput, trueDestination.DestinationInput, connection.ConnectionType);
                         trueDestination.Destination.Connections.Remove(trueDestination);
                     }
                 }
@@ -129,7 +136,7 @@ namespace ArchitectureParser.Architecture.Compositions
 
                 foreach (var destinationConnection in destinationConnections)
                 {
-                    connection.Source.Connect(destinationConnection.Destination, connection.SourceOutput, destinationConnection.DestinationInput);
+                    connection.Source.Connect(destinationConnection.Destination, connection.SourceOutput, destinationConnection.DestinationInput, connection.ConnectionType);
                     destinationConnection.Destination.Connections.Remove(destinationConnection);
                 }
 

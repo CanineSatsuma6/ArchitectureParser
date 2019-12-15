@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 
 using ArchitectureParser.Architecture.Connections;
+using ArchitectureParser.Architecture.Connections.Types;
 using ArchitectureParser.Architecture.Factories;
 
 namespace ArchitectureParser.Architecture.Components
@@ -22,13 +24,18 @@ namespace ArchitectureParser.Architecture.Components
             m_connections = new HashSet<IConnection>();
         }
 
-        public IConnection Connect(IConnectable destination, string outputName, string inputName)
+        public IConnection Connect(IConnectable destination, string outputName, string inputName, Color type)
         {
-            var connection = ConnectionFactory.Create(this, outputName, destination, inputName);
+            var connection = ConnectionFactory.Create(this, outputName, destination, inputName, type);
 
             connection.Connect();
 
             return connection;
+        }
+
+        public IConnection Connect(IConnectable destination, string outputName, string inputName, IConnectionType type)
+        {
+            return Connect(destination, outputName, inputName, ConnectionTypeFactory.GetColor(type));
         }
 
         public override string ToString()

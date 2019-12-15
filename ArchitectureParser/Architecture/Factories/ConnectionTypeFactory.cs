@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 using ArchitectureParser.Architecture.Connections.Types;
 using ArchitectureParser.Architecture.Exceptions;
@@ -51,6 +52,18 @@ namespace ArchitectureParser.Architecture.Factories
             }
 
             return type;
+        }
+
+        public static Color GetColor(IConnectionType type)
+        {
+            var color = m_types.FirstOrDefault(kvp => kvp.Value == type).Key;
+
+            if (color == default(Color))
+            {
+                throw new NoSuchTypeException(type);
+            }
+
+            return color;
         }
 
         public static void ClearTypes()

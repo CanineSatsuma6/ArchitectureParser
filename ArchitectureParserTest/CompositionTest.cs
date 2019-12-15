@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Drawing;
 using System.Linq;
 
 using ArchitectureParser.Architecture.Components;
@@ -21,6 +22,8 @@ namespace ArchitectureParserTest
         private static string CompositionOutputName = @"CompositionOutput";
         private static string CompositionInputName  = @"CompositionInput";
 
+        private static Color  Red = Color.Red;
+
         public static IComposition Composition()       => CompositionFactory.Create(CompositionName);
         public static IComponent   ExternalBefore()    => ComponentFactory.Create(ExternalBeforeName);
         public static IComponent   ExternalAfter()     => ComponentFactory.Create(ExternalAfterName);
@@ -42,7 +45,7 @@ namespace ArchitectureParserTest
             var composition       = Composition();
             var externalComponent = ExternalBefore();
 
-            var connection = composition.Connect(externalComponent, OutputName, InputName);
+            var connection = composition.Connect(externalComponent, OutputName, InputName, Red);
 
             Assert.AreEqual(composition, connection.Source);
             Assert.AreEqual(externalComponent, connection.Destination);
@@ -62,8 +65,8 @@ namespace ArchitectureParserTest
 
             composition.Contents.Add(internalComponent);
 
-            externalComponent.Connect(composition, OutputName, CompositionInputName);
-            composition.Connect(internalComponent, CompositionInputName, InputName);
+            externalComponent.Connect(composition, OutputName, CompositionInputName, Red);
+            composition.Connect(internalComponent, CompositionInputName, InputName, Red);
 
             composition.ConsolidateConnections();
 
@@ -91,8 +94,8 @@ namespace ArchitectureParserTest
 
             composition.Contents.Add(internalComponent);
 
-            internalComponent.Connect(composition, OutputName, CompositionOutputName);
-            composition.Connect(externalComponent, CompositionOutputName, InputName);
+            internalComponent.Connect(composition, OutputName, CompositionOutputName, Red);
+            composition.Connect(externalComponent, CompositionOutputName, InputName, Red);
 
             composition.ConsolidateConnections();
 
@@ -121,11 +124,11 @@ namespace ArchitectureParserTest
 
             composition.Contents.Add(internalComponent);
 
-            externalBefore.Connect(composition, OutputName, CompositionInputName);
-            composition.Connect(internalComponent, CompositionInputName, InputName);
+            externalBefore.Connect(composition, OutputName, CompositionInputName, Red);
+            composition.Connect(internalComponent, CompositionInputName, InputName, Red);
 
-            internalComponent.Connect(composition, OutputName, CompositionOutputName);
-            composition.Connect(externalAfter, CompositionOutputName, InputName);
+            internalComponent.Connect(composition, OutputName, CompositionOutputName, Red);
+            composition.Connect(externalAfter, CompositionOutputName, InputName, Red);
 
             composition.ConsolidateConnections();
 
@@ -160,9 +163,9 @@ namespace ArchitectureParserTest
             var externalAfter  = ExternalAfter();
             var composition    = Composition();
 
-            externalBefore.Connect(composition, OutputName, CompositionInputName);
-            composition.Connect(composition, CompositionInputName, CompositionOutputName);
-            composition.Connect(externalAfter, CompositionOutputName, InputName);
+            externalBefore.Connect(composition, OutputName, CompositionInputName, Red);
+            composition.Connect(composition, CompositionInputName, CompositionOutputName, Red);
+            composition.Connect(externalAfter, CompositionOutputName, InputName, Red);
 
             composition.ConsolidateConnections();
 
@@ -189,7 +192,7 @@ namespace ArchitectureParserTest
             var composition       = Composition();
 
             composition.Contents.Add(internalComponent);
-            composition.Connect(internalComponent, CompositionInputName, InputName);
+            composition.Connect(internalComponent, CompositionInputName, InputName, Red);
 
             composition.ConsolidateConnections();
         }
@@ -201,7 +204,7 @@ namespace ArchitectureParserTest
             var externalComponent = ExternalAfter();
             var composition       = Composition();
 
-            composition.Connect(externalComponent, CompositionOutputName, InputName);
+            composition.Connect(externalComponent, CompositionOutputName, InputName, Red);
 
             composition.ConsolidateConnections();
         }
