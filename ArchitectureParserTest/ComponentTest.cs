@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Drawing;
 
 using ArchitectureParser.Architecture.Components;
 using ArchitectureParser.Architecture.Factories;
@@ -14,6 +15,8 @@ namespace ArchitectureParserTest
 
         private static string OutputName = @"Output";
         private static string InputName  = @"Input";
+
+        private static Color  Red = Color.Red;
 
         private static IComponent TestComponent()        => ComponentFactory.Create(TestComponentName);
         private static IComponent DestinationComponent() => ComponentFactory.Create(DestinationComponentName);
@@ -33,7 +36,7 @@ namespace ArchitectureParserTest
             var component   = TestComponent();
             var destination = DestinationComponent();
 
-            var connection = component.Connect(destination, OutputName, InputName);
+            var connection = component.Connect(destination, OutputName, InputName, Red);
 
             Assert.AreEqual(component, connection.Source);
             Assert.AreEqual(destination, connection.Destination);
@@ -47,7 +50,7 @@ namespace ArchitectureParserTest
         public void ComponentConnectToNullDestination()
         {
             var component  = TestComponent();
-            var connection = component.Connect(null, null, null);
+            var connection = component.Connect(null, null, null, Red);
 
             Assert.IsTrue(connection is NullConnection);
             Assert.AreEqual(0, component.Connections.Count);

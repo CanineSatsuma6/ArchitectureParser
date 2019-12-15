@@ -1,4 +1,5 @@
 ﻿using ArchitectureParser.Architecture.Components;
+using ArchitectureParser.Architecture.Connections.Types;
 
 namespace ArchitectureParser.Architecture.Connections
 {
@@ -27,6 +28,11 @@ namespace ArchitectureParser.Architecture.Connections
         {
             get { return string.Empty; }
             set { }
+        }
+
+        public IConnectionType ConnectionType
+        {
+            get { return NullConnectionType.Instance; }
         }
 
         private NullConnection()

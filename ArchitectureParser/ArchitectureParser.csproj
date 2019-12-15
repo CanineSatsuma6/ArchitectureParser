@@ -48,6 +48,14 @@
     <Compile Include="Architecture\Compositions\Composition.cs" />
     <Compile Include="Architecture\Components\IComponent.cs" />
     <Compile Include="Architecture\Compositions\IComposition.cs" />
+    <Compile Include="Architecture\Connections\Types\ConnectionType.cs" />
+    <Compile Include="Architecture\Connections\Types\IConnectionType.cs" />
+    <Compile Include="Architecture\Connections\Types\ICPPType.cs" />
+    <Compile Include="Architecture\Connections\Types\IJavaType.cs" />
+    <Compile Include="Architecture\Connections\Types\NullConnectionType.cs" />
+    <Compile Include="Architecture\Exceptions\NoSuchTypeException.cs" />
+    <Compile Include="Architecture\Exceptions\TypeAlreadyRegisteredException.cs" />
+    <Compile Include="Architecture\Factories\ConnectionTypeFactory.cs" />
     <Compile Include="Architecture\Factories\ReusableComponentFactory.cs" />
     <Compile Include="Architecture\ReusableComponents\IReusableComponent.cs" />
     <Compile Include="Architecture\ReusableComponents\NullReusableComponent.cs" />

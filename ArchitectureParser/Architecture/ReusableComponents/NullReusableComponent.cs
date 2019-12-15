@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 
 using ArchitectureParser.Architecture.Connections;
+using ArchitectureParser.Architecture.Connections.Types;
 using ArchitectureParser.Architecture.NullObjects;
 
 
@@ -33,7 +35,12 @@ namespace ArchitectureParser.Architecture.ReusableComponents
             m_connections = new NullSet<IConnection>();
         }
 
-        public IConnection Connect(IConnectable destination, string outputName, string inputName)
+        public IConnection Connect(IConnectable destination, string outputName, string inputName, Color type)
+        {
+            return NullConnection.Instance;
+        }
+
+        public IConnection Connect(IConnectable destination, string outputName, string inputName, IConnectionType type)
         {
             return NullConnection.Instance;
         }
