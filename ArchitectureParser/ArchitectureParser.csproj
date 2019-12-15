@@ -49,6 +49,7 @@
     <Compile Include="Architecture\Components\IComponent.cs" />
     <Compile Include="Architecture\Compositions\IComposition.cs" />
     <Compile Include="Architecture\Connections\Types\ConnectionType.cs" />
+    <Compile Include="Architecture\Connections\Types\IConnectionType.cs" />
     <Compile Include="Architecture\Connections\Types\ICPPType.cs" />
     <Compile Include="Architecture\Connections\Types\IJavaType.cs" />
     <Compile Include="Architecture\Connections\Types\NullConnectionType.cs" />

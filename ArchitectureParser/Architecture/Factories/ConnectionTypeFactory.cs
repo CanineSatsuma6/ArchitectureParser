@@ -8,7 +8,7 @@ namespace ArchitectureParser.Architecture.Factories
 {
     public static class ConnectionTypeFactory
     {
-        private static Dictionary<Color, IJavaType> m_javaTypes = new Dictionary<Color, IJavaType>()
+        private static Dictionary<Color, IConnectionType> m_types = new Dictionary<Color, IConnectionType>()
                                                                   {
                                                                       { Color.Red,    ConnectionType.Integer },
                                                                       { Color.Blue,   ConnectionType.Double  },
@@ -16,69 +16,33 @@ namespace ArchitectureParser.Architecture.Factories
                                                                       { Color.Yellow, ConnectionType.String  }
                                                                   };
 
-        private static Dictionary<Color, ICPPType>  m_cppTypes  = new Dictionary<Color, ICPPType>()
-                                                                  {
-                                                                      { Color.Red,    ConnectionType.Integer },
-                                                                      { Color.Blue,   ConnectionType.Double  },
-                                                                      { Color.Green,  ConnectionType.Boolean },
-                                                                      { Color.Yellow, ConnectionType.String  }
-                                                                  };
-
-        public static void RegisterJavaType(Color color, IJavaType type)
+        public static void RegisterType(Color color, IConnectionType type)
         {
-            if (m_javaTypes.ContainsKey(color))
+            if (m_types.ContainsKey(color))
             {
-                throw new TypeAlreadyRegisteredException(color, m_javaTypes[color], type);
+                throw new TypeAlreadyRegisteredException(color, m_types[color], type);
             }
 
-            m_javaTypes.Add(color, type);
+            m_types.Add(color, type);
         }
 
         public static IJavaType GetJavaType(Color color)
         {
-            IJavaType type;
-
-            if (m_javaTypes.ContainsKey(color))
-            {
-                type = m_javaTypes[color];
-            }
-
-            else
-            {
-                throw new NoSuchTypeException(color);
-            }
-
-            return type;
-        }
-
-        public static void ClearJavaTypes()
-        {
-            m_javaTypes = new Dictionary<Color, IJavaType>()
-            {
-                { Color.Red,    ConnectionType.Integer },
-                { Color.Blue,   ConnectionType.Double  },
-                { Color.Green,  ConnectionType.Boolean },
-                { Color.Yellow, ConnectionType.String  }
-            };
-        }
-
-        public static void RegisterCppType(Color color, ICPPType type)
-        {
-            if (m_cppTypes.ContainsKey(color))
-            {
-                throw new TypeAlreadyRegisteredException(color, m_cppTypes[color], type);
-            }
-
-            m_cppTypes.Add(color, type);
+            return GetType(color) as IJavaType;
         }
 
         public static ICPPType GetCPPType(Color color)
         {
-            ICPPType type;
+            return GetType(color) as ICPPType;
+        }
 
-            if (m_cppTypes.ContainsKey(color))
+        public static IConnectionType GetType(Color color)
+        {
+            IConnectionType type;
+
+            if (m_types.ContainsKey(color))
             {
-                type = m_cppTypes[color];
+                type = m_types[color];
             }
 
             else
@@ -89,15 +53,15 @@ namespace ArchitectureParser.Architecture.Factories
             return type;
         }
 
-        public static void ClearCPPTypes()
+        public static void ClearTypes()
         {
-            m_cppTypes = new Dictionary<Color, ICPPType>()
-            {
-                { Color.Red,    ConnectionType.Integer },
-                { Color.Blue,   ConnectionType.Double  },
-                { Color.Green,  ConnectionType.Boolean },
-                { Color.Yellow, ConnectionType.String  }
-            };
+            m_types = new Dictionary<Color, IConnectionType>()
+                          {
+                              { Color.Red,    ConnectionType.Integer },
+                              { Color.Blue,   ConnectionType.Double  },
+                              { Color.Green,  ConnectionType.Boolean },
+                              { Color.Yellow, ConnectionType.String  }
+                          };
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ArchitectureParser.Architecture.Connections.Types
 {
-    public class NullConnectionType : IJavaType, ICPPType
+    public class NullConnectionType : IConnectionType
     {
         public string Name
         {

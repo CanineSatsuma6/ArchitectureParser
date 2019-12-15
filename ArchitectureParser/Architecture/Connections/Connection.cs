@@ -1,4 +1,8 @@
-﻿namespace ArchitectureParser.Architecture.Connections
+﻿using ArchitectureParser.Architecture.Connections.Types;
+using ArchitectureParser.Architecture.Factories;
+using System.Drawing;
+
+namespace ArchitectureParser.Architecture.Connections
 {
     public class Connection : IConnection
     {
@@ -28,13 +32,19 @@
             set;
         }
 
+        public IConnectionType ConnectionType
+        {
+            get;
+        }
+
         // The constructor creates a Connection from the source to the destination
-        public Connection(IConnectable source, string sourceOutput, IConnectable destination, string destinationInput)
+        public Connection(IConnectable source, string sourceOutput, IConnectable destination, string destinationInput, Color typeColor)
         {
             Source           = source;
             SourceOutput     = sourceOutput;
             Destination      = destination;
             DestinationInput = destinationInput;
+            ConnectionType   = ConnectionTypeFactory.GetType(typeColor);
         }
 
         public void Connect()

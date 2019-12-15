@@ -1,6 +1,6 @@
 ﻿namespace ArchitectureParser.Architecture.Connections.Types
 {
-    public class ConnectionType : IJavaType, ICPPType
+    public class ConnectionType : IConnectionType
     {
         public static readonly ConnectionType Integer = new ConnectionType("int",     "int",         "0",     "0");
         public static readonly ConnectionType Double  = new ConnectionType("double",  "double",      "0.0",   "0.0");
