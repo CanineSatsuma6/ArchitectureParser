@@ -71,6 +71,7 @@
     <Compile Include="Architecture\Compositions\NullComposition.cs" />
     <Compile Include="Architecture\Connections\NullConnection.cs" />
     <Compile Include="Architecture\NullObjects\NullSet.cs" />
+    <Compile Include="DiagramUtils\DiagramDecoder.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
