@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArchitectureParser.Expressions
+namespace ArchitectureParser.Generators.Expressions
 {
     public class CommentExpression : Expression
     {

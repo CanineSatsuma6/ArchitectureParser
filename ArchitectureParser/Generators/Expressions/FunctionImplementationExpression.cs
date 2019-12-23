@@ -2,7 +2,7 @@
 using System.Text;
 using System.Linq;
 
-namespace ArchitectureParser.Expressions
+namespace ArchitectureParser.Generators.Expressions
 {
     public class FunctionImplementationExpression : Expression
     {

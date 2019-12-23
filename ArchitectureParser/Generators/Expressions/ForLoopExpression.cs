@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace ArchitectureParser.Expressions
+namespace ArchitectureParser.Generators.Expressions
 {
     public class ForLoopExpression : Expression
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ArchitectureParser.Expressions
+namespace ArchitectureParser.Generators.Expressions
 {
     public class FunctionPrototypeExpression : Expression
     {

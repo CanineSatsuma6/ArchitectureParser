@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace ArchitectureParser.Expressions
+namespace ArchitectureParser.Generators.Expressions
 {
     public class ExpressionBlock : Expression
     {

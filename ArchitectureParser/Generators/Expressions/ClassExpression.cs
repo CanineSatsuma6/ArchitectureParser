@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Linq;
 
-namespace ArchitectureParser.Expressions
+namespace ArchitectureParser.Generators.Expressions
 {
     public abstract class ClassExpression : Expression
     {
