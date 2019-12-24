@@ -10,12 +10,12 @@ namespace ArchitectureParser.DiagramUtils
 {
     public static class DiagramDecoder
     {
-        public static byte[] Base64Decode(string toDecode)
+        private static byte[] Base64Decode(string toDecode)
         {
             return Convert.FromBase64String(toDecode);
         }
 
-        public static string Inflate(byte[] bytesToDecompress)
+        private static string Inflate(byte[] bytesToDecompress)
         {
             using (MemoryStream inputStream = new MemoryStream(bytesToDecompress))
             {
@@ -29,12 +29,12 @@ namespace ArchitectureParser.DiagramUtils
             }
         }
 
-        public static string URLDecode(string toDecode)
+        private static string URLDecode(string toDecode)
         {
             return Uri.UnescapeDataString(toDecode);
         }
 
-        public static XElement ToXElement(this string toElement)
+        private static XElement ToXElement(this string toElement)
         {
             return XElement.Parse(toElement);
         }
