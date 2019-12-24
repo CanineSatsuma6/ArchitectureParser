@@ -79,6 +79,27 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generators\Builders\JavaBuilder.cs" />
+    <Compile Include="Generators\Expressions\AssignmentExpression.cs" />
+    <Compile Include="Generators\Expressions\ClassExpression.cs" />
+    <Compile Include="Generators\Expressions\CommentExpression.cs" />
+    <Compile Include="Generators\Expressions\Expression.cs" />
+    <Compile Include="Generators\Expressions\ExpressionBlock.cs" />
+    <Compile Include="Generators\Expressions\ForLoopExpression.cs" />
+    <Compile Include="Generators\Expressions\FunctionCallExpression.cs" />
+    <Compile Include="Generators\Expressions\FunctionImplementationExpression.cs" />
+    <Compile Include="Generators\Expressions\FunctionParameterExpression.cs" />
+    <Compile Include="Generators\Expressions\FunctionPrototypeExpression.cs" />
+    <Compile Include="Generators\Expressions\ImportExpression.cs" />
+    <Compile Include="Generators\Expressions\IncludeExpression.cs" />
+    <Compile Include="Generators\Expressions\InterfaceExpression.cs" />
+    <Compile Include="Generators\Expressions\LabelExpression.cs" />
+    <Compile Include="Generators\Expressions\NewlineExpression.cs" />
+    <Compile Include="Generators\Expressions\OverrideExpression.cs" />
+    <Compile Include="Generators\Expressions\PackageExpression.cs" />
+    <Compile Include="Generators\Expressions\PragmaExpression.cs" />
+    <Compile Include="Generators\Expressions\ReturnExpression.cs" />
+    <Compile Include="Generators\Expressions\VariableDeclarationExpression.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
